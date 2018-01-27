@@ -7,7 +7,7 @@ var LaunchOnTouch = cc.Node.extend({
             event: cc.EventListener.TOUCH_ONE_BY_ONE,
             swallowTouches: true,
             onTouchBegan: function(touch, event) {
-                console.log(touch);
+
                 if (that.touchInViewport(touch) && that._launch != null) {
                     that._launch();
                 }
@@ -17,6 +17,9 @@ var LaunchOnTouch = cc.Node.extend({
     },
 
     touchInViewport: function(touch) {
-        return true;
+        var pointTouch = touch.getLocation();
+        if (pointTouch.y >= 60 + 51)
+            return true;
+        return false;
     }
 });
