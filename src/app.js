@@ -30,7 +30,7 @@ var IngameLayer = cc.LayerColor.extend({
         this.addChild(this._ball);
 
         // Slider 
-        this._sliderBar = new Slider(size);
+        this._sliderBar = new SlideBar(size);
         this.addChild(this._sliderBar);
 
         this._slider = new cc.Sprite(res.Slide_png);
