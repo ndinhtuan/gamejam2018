@@ -76,12 +76,17 @@ var Ball = cc.Node.extend({
     },
 
     isDead() {
+        if (this._state == StateBallEnum.IDLE) return false;
         var worldPos = this._body.getParent()
             .convertToWorldSpace(this._body.getPosition());
         var curY = worldPos.y;
 
         if (curY <= THRESH.THRESH_DOWN) return true;
         return false;
+    },
+
+    setState: function(state) {
+        this._state = state;
     }
 
 });
