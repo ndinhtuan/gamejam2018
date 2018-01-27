@@ -5,6 +5,6 @@ var SlideBar = cc.Node.extend({
 		this._super();
 		this._slideBar = new cc.Sprite(res.Border_png);
 		this._slideBar.setAnchorPoint(0, 0);
-		this.addChild(this._sliderBar);
+		this.addChild(this._slideBar);
 	}
-})
+});

@@ -4,9 +4,9 @@ var StateBallEnum = {
 }
 
 var THRESH = {
-    THRESH_LEFT: 50,
+    THRESH_LEFT: 60,
     THRESH_TOP: 720,
-    THRESH_RIGHT: 1280 - 30
+    THRESH_RIGHT: 1280 - 20
 }
 var Ball = cc.Node.extend({
     _body: null,
@@ -45,23 +45,25 @@ var Ball = cc.Node.extend({
 
 
     contact() {
-        var curX = this._body.getPositionX();
-        var curY = this._body.getPositionY();
+
+
+				var worldPos = this._body.getParent()
+					.convertToWorldSpace(this._body.getPosition());
+				var curX = worldPos.x;
+				var curY = worldPos.y;
+
         var contentSize = this._body.getContentSize();
-        console.log("x: ", contentSize.height, " y ", contentSize.width);
         if (curX <= THRESH.THRESH_LEFT) this.reflectLeft();
         if (curX + contentSize.width >= THRESH.THRESH_RIGHT) this.reflectRight();
         if (curY + contentSize.height >= THRESH.THRESH_TOP) this.reflectDown();
     },
 
     reflectDown: function() {
-        console.log("reflect down");
         this._direction.x = this._direction.x;
         this._direction.y = -this._direction.y;
     },
 
     reflectLeft() {
-        console.log("reflect left");
         this._direction.x = -this._direction.x;
         this._direction.y = this._direction.y;
     },
@@ -71,10 +73,6 @@ var Ball = cc.Node.extend({
         this._direction.x = -this._direction.x;
         this._direction.y = this._direction.y;
     },
-
-    slideMove(dx) {
-
-    }
 
 });
 
