@@ -13,6 +13,13 @@
 
     "jsList" : [
         "src/resource.js",
-        "src/app.js"
+        "src/app.js",
+        "src/Cannon.js",
+        "src/Ground.js",
+				"src/Constants.js",
+				"src/LaunchOnTouch.js",
+				"src/Ball.js",
+                "src/Utils.js",
+                "src/Slider.js"
     ]
 }
