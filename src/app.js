@@ -1,4 +1,4 @@
-var IngameLayer = cc.Layer.extend({
+var IngameLayer = cc.LayerColor.extend({
     minY: null,
     maxY: null,
     _cannon: null,
@@ -6,7 +6,7 @@ var IngameLayer = cc.Layer.extend({
     _launchOnTouch: null,
     _slider: null,
     ctor: function() {
-        this._super();
+        this._super(new cc.Color(239, 239, 239, 239));
         var size = cc.winSize;
         console.log(size.width);
 
@@ -20,7 +20,7 @@ var IngameLayer = cc.Layer.extend({
         this._cannon.setState(StateCannonEnum.ROTATE);
         this.addChild(this._cannon);
         this._cannon.setAnchorPoint(0, 0);
-        this._cannon.setPositionY(51 + 60);
+        this._cannon.setPositionY(51 + 60 + 30);
 
         this._launchOnTouch = new LaunchOnTouch();
         this._launchOnTouch._launch = this.launch.bind(this);
