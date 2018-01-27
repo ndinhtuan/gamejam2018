@@ -1,21 +1,19 @@
+var MaxViewDistance = 1280 >> 1;
 var IngameLayer = cc.LayerColor.extend({
 	minY: null,
 	maxY: null,
 	_cannon: null,
 	_ball: null,
-	_launchOnTouch: null,
-	_slider: null,
+	_launchOnTouch: null, _slider: null,
 	_nearObj: [],
 	_farObj: [],
+	_state : null,
 	ctor: function() {
 		this._super(new cc.Color(239, 239, 239, 239));
-		var size = cc.winSize;
 
 		this._ground = new cc.Sprite(res.Ground_png);
 		this._ground.setAnchorPoint(0, 0);
 		this._ground.setPositionY(60);
-
-		this.addChild(this._ground);
 
 
 		this._cannon = new Cannon();
@@ -23,33 +21,42 @@ var IngameLayer = cc.LayerColor.extend({
 		this._cannon.setAnchorPoint(0, 0);
 		this._cannon.setPositionY(51 + 60 + 20);
 		this._cannon.setPositionX(70);
-		this.addChild(this._cannon);
 
+
+		this._target = new Cannon();
+
+		this._target.setState(StateCannonEnum.IDLE);
+		this._target.setAnchorPoint(0, 0);
+		this._target.setPositionY(51 + 60 + 20);
+		this._target.setPositionX(600);
 
 
 		this._launchOnTouch = new LaunchOnTouch();
 		this._launchOnTouch._launch = this.launch.bind(this);
-		this.addChild(this._launchOnTouch);
-
 
 		this._ball = new Ball();
-		this.addChild(this._ball);
 
+		this._slideBar = new SlideBar(cc.winSize);
 
-
-
-		// Slide Bar
-		this._slideBar = new SlideBar(size);
-		this.addChild(this._slideBar);
-		//	console.log("add slidebar");
-
-		// Slide
 		this._slider = new Slider();
 		this._slider._callback = this.slide.bind(this);
+		this._slider._reachEndCallback = this.sliderReachEnd.bind(this);
+
+		this.addChild(this._ground);
+		this.addChild(this._cannon);
+		this.addChild(this._target);
+		this.addChild(this._launchOnTouch);
+		this.addChild(this._ball);
+		this.addChild(this._slideBar);
 		this.addChild(this._slider);
 
-		this._nearObj = [this._ground, this._cannon, this._ball];
+		this._nearObj = [this._cannon, this._ball, this._target];
+		var that = this;
+		this._nearObj.forEach(function(obj){
+			obj.originX = obj.getPositionX();
+		});
 
+		this.reachTarget();
 		this.scheduleUpdate();
 		return true;
 	},
@@ -57,8 +64,8 @@ var IngameLayer = cc.LayerColor.extend({
 	update: function(dt) { // callback
 		this._cannon.tick(dt);
 		this._ball.tick(dt);
+		this._slider.tick(dt);
 	},
-
 
 	launch: function() {
 		this._ball.launch(
@@ -70,14 +77,38 @@ var IngameLayer = cc.LayerColor.extend({
 		this._cannon.setState(StateCannonEnum.IDLE);
 	},
 
-	slide: function(dx){
-
+	slide: function(rate){
 		this._nearObj.forEach(function(item){
 			item.setPositionX(
-					item.getPositionX() - dx
+					item.originX + rate * MaxViewDistance
 					);
 		})
+	},
+
+	reachTarget(){
+		this._state = 'reach';
+		this.removeChild(this._cannon);
+		this._cannon= this._target;
+		this._slider.toEnd();
+	},
+
+	sliderReachEnd(){
+		console.log("reach end");
+		this._cannon.toLeft();
+		this._cannon._reachLeftCallback = this.reachLeft.bind(this);
+	},
+
+	reachLeft(){
+		this._target = new Cannon();
+
+		this._target.setState(StateCannonEnum.IDLE);
+		this._target.setAnchorPoint(0, 0);
+		this._target.setPositionY(51 + 60 + 20);
+		this._target.setPositionX(600);
+		this.addChild(this._target);
 	}
+
+
 });
 
 var IngameScene = cc.Scene.extend({

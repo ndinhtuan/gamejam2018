@@ -1,10 +1,11 @@
-var	SliderMinX = 17; 
+var	SliderMinX = 17;
 var	SliderMaxX = 1137;
-
+var SliderSpeedAuto = 400;
 
 var Slider = cc.Node.extend({
 	_slider : null,
 	_callback : null, // callback(deltaX)
+	_state : null,
 	ctor : function(){
 		var that = this;
 		this._super();
@@ -13,8 +14,8 @@ var Slider = cc.Node.extend({
 		this._slider.setAnchorPoint(0, 0);
 		this.setAnchorPoint(0, 0);
 		this.setPositionY(15);
-		this._slider.setPositionX(SliderMaxX);
-
+		//		this._slider.setPositionX(SliderMinX);
+		this._state = 'idle';
 		this.addChild(this._slider);
 
 
@@ -24,13 +25,15 @@ var Slider = cc.Node.extend({
 			swallowTouches: false,
 			onTouchBegan: function(touch, event) {
 
-				if (that.touchInSlider(touch))  {
-					that._dragging = true;
+				if (that.touchInSlider(touch) && that._state == 'idle')  {
+					that._state = "drag";
 				}
 				return true;
 			},
+
 			onTouchMoved: function(touch, event){
-				if (that._dragging){
+				if (that._state == "drag"){
+					console.log("draggin");
 					var prevX = touch.getPreviousLocation().x;
 					var	currX = touch.getLocationX();
 					var deltaX = currX - prevX;
@@ -38,7 +41,7 @@ var Slider = cc.Node.extend({
 					var real = Utils.Clamp(expect, SliderMinX, SliderMaxX);
 
 					if (that._callback){
-						that._callback(real - that._slider.getPositionX());
+						that._callback(that.rate())
 					}
 					that._slider.setPositionX(
 							real
@@ -56,7 +59,28 @@ var Slider = cc.Node.extend({
 		return cc.rectContainsPoint(this._slider.getBoundingBox(), nodeSpaceLocation);
 	},
 
-	
+	rate : function(){
+		var currentValue = this._slider.getPositionX() - SliderMinX;
+		return (1.0 - currentValue / (SliderMaxX - SliderMinX));
+	},
 
+	toEnd : function(){
+		this._state = 'toend';
+	},
+
+	tick : function(dt){
+		if (this._state == 'toend'){
+			this._slider.setPositionX(
+					this._slider.getPositionX() + SliderSpeedAuto * dt
+					);
+			this._callback(this.rate());
+			if (this._slider.getPositionX() >= SliderMaxX - 5){
+				this._state = 'idle';
+				if (this._reachEndCallback){
+					this._reachEndCallback();
+				}
+			}
+		}
+	}
 })
 
