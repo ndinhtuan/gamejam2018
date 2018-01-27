@@ -1,0 +1,97 @@
+{
+  "version": "1.1.1",
+  "windows": {
+    "main": {
+      "main": true,
+      "url": "app://editor/index.html",
+      "windowType": "dockable",
+      "x": -8,
+      "y": -8,
+      "width": 1296,
+      "height": 776,
+      "layout": {
+        "children": [
+          {
+            "children": [
+              {
+                "active": 0,
+                "children": [
+                  "hierarchy"
+                ],
+                "height": 328,
+                "type": "panel",
+                "width": 207
+              },
+              {
+                "active": 0,
+                "children": [
+                  "assets"
+                ],
+                "height": 318,
+                "type": "panel",
+                "width": 207
+              }
+            ],
+            "height": 649,
+            "type": "dock-v",
+            "width": 207
+          },
+          {
+            "children": [
+              {
+                "active": 0,
+                "children": [
+                  "scene"
+                ],
+                "height": 399,
+                "type": "panel",
+                "width": 753
+              },
+              {
+                "active": 0,
+                "children": [
+                  "console",
+                  "timeline",
+                  "node-library"
+                ],
+                "height": 247,
+                "type": "panel",
+                "width": 753
+              }
+            ],
+            "height": 649,
+            "type": "dock-v",
+            "width": 753
+          },
+          {
+            "active": 0,
+            "children": [
+              "inspector"
+            ],
+            "height": 649,
+            "type": "panel",
+            "width": 308
+          }
+        ],
+        "type": "dock-h"
+      },
+      "panels": [
+        "console",
+        "inspector",
+        "hierarchy",
+        "assets",
+        "scene",
+        "node-library",
+        "timeline"
+      ]
+    }
+  },
+  "panels": {
+    "project-settings": {
+      "x": 342,
+      "y": 101,
+      "width": 600,
+      "height": 564
+    }
+  }
+}
