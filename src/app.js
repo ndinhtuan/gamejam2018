@@ -77,21 +77,19 @@ var IngameLayer = cc.LayerColor.extend({
     },
 
     update: function(dt) { // callback
-        console.log("hhhh");
-        if (!isAlive) return;
-        this._cannon.tick(dt);
-        this._cannon1.tick(dt);
-        this._ball.tick(dt);
-        this.checkCollision();
+        // if (!isAlive) return;
+        // this._cannon.tick(dt);
+        // this._cannon1.tick(dt);
+        // this._ball.tick(dt);
+        // this.checkCollision();
 
-        if (this._ball.isDead()) {
-            console.log("FFFF");
-            isAlive = false;
-            this._gameOver.setVisible(true);
-            this._launchAgain = new LaunchOnTouch();
-            this._launchAgain._launch = this.launchAgain.bind(this);
-            this.addChild(this._launchAgain);
-        }
+        // if (this._ball.isDead()) {
+        //     isAlive = false;
+        //     this._gameOver.setVisible(true);
+        //     this._launchAgain = new LaunchOnTouch();
+        //     this._launchAgain._launch = this.launchAgain.bind(this);
+        //     this.addChild(this._launchAgain);
+        // }
     },
 
     launchAgain: function() {
