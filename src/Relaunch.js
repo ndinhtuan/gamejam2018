@@ -1,18 +1,12 @@
-var LaunchOnTouch = cc.Node.extend({
-    _launch: null,
-
+var Replay = cc.Node.extend({
     ctor: function() {
         var that = this;
         this._super();
         cc.eventManager.addListener({
             event: cc.EventListener.TOUCH_ONE_BY_ONE,
-            swallowTouches: false,
+            swallowTouches: true,
             onTouchBegan: function(touch, event) {
-
-                if (that.touchInViewport(touch) 
-										&& that._launch != null
-										&& isAlive) {
-                    that._launch();
+                if (that.touchInViewport(touch))  {
                 }
                 return true;
             },

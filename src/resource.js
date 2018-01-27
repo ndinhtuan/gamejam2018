@@ -6,7 +6,9 @@ var res = {
     Carrier_png: "Art_component/Carrier.png",
     Ball_png: "Art_component/cannonball.png",
     Slide_png: "Art_component/slider.png",
-    Border_png: "Art_component/Borders.png"
+    Border_png: "Art_component/Borders.png",
+    GameOver_png: "Art_component/Gameover.png",
+    GameOverBg_png: "Art_component/GameOverBackGround.png"
 
 };
 

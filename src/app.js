@@ -1,14 +1,14 @@
+
 var MaxViewDistance = 1280 >> 1;
+var isAlive = null;
+var score = null;
+
 var IngameLayer = cc.LayerColor.extend({
-	minY: null,
-	maxY: null,
-	_cannon: null,
-	_ball: null,
-	_launchOnTouch: null, _slider: null,
-	_nearObj: [],
-	_farObj: [],
-	_state : null,
 	ctor: function() {
+		this._curCannon = 1;
+		score = 0;
+		isAlive = true;
+
 		this._super(new cc.Color(239, 239, 239, 239));
 
 		this._ground = new cc.Sprite(res.Ground_png);
@@ -18,21 +18,15 @@ var IngameLayer = cc.LayerColor.extend({
 
 		this._cannon = new Cannon();
 		this._cannon.setState(StateCannonEnum.ROTATE);
-		this._cannon.setAnchorPoint(0, 0);
-		this._cannon.setPositionY(51 + 60 + 30);
-		this._cannon.setPositionX(70);
-
 
 		this._target = new Cannon();
 
 		this._target.setState(StateCannonEnum.IDLE);
 		this._target.setAnchorPoint(0, 0);
-		this._target.setPositionY(51 + 60 + 20);
-		this._target.setPositionX(600);
-
 
 		this._launchOnTouch = new LaunchOnTouch();
 		this._launchOnTouch._launch = this.launch.bind(this);
+		this._launchOnTouch.layer = this;
 
 		this._ball = new Ball();
 
@@ -42,6 +36,11 @@ var IngameLayer = cc.LayerColor.extend({
 		this._slider._callback = this.slide.bind(this);
 		this._slider._reachEndCallback = this.sliderReachEnd.bind(this);
 
+		this._gameOver = new GameOver();
+		this._gameOver.setVisible(false);
+		this._gameOver.layer = this;
+
+		this.addChild(this._gameOver);
 		this.addChild(this._ground);
 		this.addChild(this._cannon);
 		this.addChild(this._target);
@@ -52,19 +51,34 @@ var IngameLayer = cc.LayerColor.extend({
 
 		this._nearObj = [this._cannon, this._ball, this._target];
 		var that = this;
+		this.replay();
 		this._nearObj.forEach(function(obj){
 			obj.originX = obj.getPositionX();
 		});
-
-		this.reachTarget();
 		this.scheduleUpdate();
 		return true;
 	},
 
 	update: function(dt) { // callback
+		if (!isAlive) return;
 		this._cannon.tick(dt);
 		this._ball.tick(dt);
 		this._slider.tick(dt);
+		this.checkCollision();
+		if (this._ball.isDead()) {
+			isAlive = false;
+			this._gameOver.setVisible(true);
+		}
+	},
+
+	launchAgain: function() {
+		isAlive = true;
+		this._ball.setState(StateBallEnum.IDLE);
+		this._cannon.setState(StateCannonEnum.ROTATE);
+		this._target.setState(StateCannonEnum.IDLE);
+		this._ball._body.setPositionY(51 + 60);
+		this._ball._body.setPositionX(150);
+		this._gameOver.setVisible(false);
 	},
 
 	launch: function() {
@@ -83,6 +97,27 @@ var IngameLayer = cc.LayerColor.extend({
 					item.originX + rate * MaxViewDistance
 					);
 		})
+	},
+	checkCollision: function() {
+		var rectCannon = this._cannon._gun.getBoundingBoxToWorld();
+		var rectTarget = this._target._gun.getBoundingBoxToWorld();
+
+		var rectBall = this._ball._body.getBoundingBoxToWorld();
+		// console.log(rectBall);
+
+		if (cc.rectIntersectsRect(rectBall, rectCannon) && this._curCannon == 2) {
+			this._cannon.setState(StateCannonEnum.ROTATE);
+			this._target.setState(StateCannonEnum.IDLE);
+			this._ball.setState(StateBallEnum.IDLE);
+		}
+
+		if (cc.rectIntersectsRect(rectBall, rectTarget) && this._curCannon == 1) {
+			this._target.setState(StateCannonEnum.ROTATE);
+			this._cannon.setState(StateCannonEnum.IDLE);
+			this._ball.setState(StateBallEnum.IDLE);
+			this.reachTarget();
+		}
+
 	},
 
 	reachTarget(){
@@ -105,9 +140,20 @@ var IngameLayer = cc.LayerColor.extend({
 		this._target.setPositionX(600);
 		this.addChild(this._target);
 		this._nearObj.push(this._target);
+	},
+
+	replay : function(){
+		this._cannon.setPositionY(51 + 60 + 30);
+		this._cannon.setPositionX(70);
+		this._target.setState(StateCannonEnum.IDLE);
+		this._target.setAnchorPoint(0, 0);
+		this._target.setPositionY(51 + 60 + 20);
+		this._target.setPositionX(600);
+
+		this._cannon._state = StateCannonEnum.ROTATE;
+		isAlive = true;
+
 	}
-
-
 });
 
 var IngameScene = cc.Scene.extend({

@@ -9,12 +9,13 @@ var Slider = cc.Node.extend({
 	ctor : function(){
 		var that = this;
 		this._super();
+		this.state = 'idle'; // drag | toend
 
 		this._slider = new cc.Sprite(res.Slide_png);
 		this._slider.setAnchorPoint(0, 0);
 		this.setAnchorPoint(0, 0);
 		this.setPositionY(15);
-		//		this._slider.setPositionX(SliderMinX);
+		this._slider.setPositionX(SliderMaxX);
 		this._state = 'idle';
 		this.addChild(this._slider);
 
@@ -33,7 +34,6 @@ var Slider = cc.Node.extend({
 
 			onTouchMoved: function(touch, event){
 				if (that._state == "drag"){
-					console.log("draggin");
 					var prevX = touch.getPreviousLocation().x;
 					var	currX = touch.getLocationX();
 					var deltaX = currX - prevX;

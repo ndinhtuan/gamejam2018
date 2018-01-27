@@ -6,7 +6,8 @@ var StateBallEnum = {
 var THRESH = {
     THRESH_LEFT: 60,
     THRESH_TOP: 720,
-    THRESH_RIGHT: 1280 - 20
+    THRESH_RIGHT: 1280 - 20,
+    THRESH_DOWN: 51
 }
 var Ball = cc.Node.extend({
     _body: null,
@@ -41,16 +42,17 @@ var Ball = cc.Node.extend({
         }
 
         this.contact();
+
     },
 
 
     contact() {
 
 
-				var worldPos = this._body.getParent()
-					.convertToWorldSpace(this._body.getPosition());
-				var curX = worldPos.x;
-				var curY = worldPos.y;
+        var worldPos = this._body.getParent()
+            .convertToWorldSpace(this._body.getPosition());
+        var curX = worldPos.x;
+        var curY = worldPos.y;
 
         var contentSize = this._body.getContentSize();
         if (curX <= THRESH.THRESH_LEFT) this.reflectLeft();
@@ -69,10 +71,22 @@ var Ball = cc.Node.extend({
     },
 
     reflectRight() {
-        console.log("reflect right");
         this._direction.x = -this._direction.x;
         this._direction.y = this._direction.y;
     },
 
-});
+    isDead() {
+        if (this._state == StateBallEnum.IDLE) return false;
+        var worldPos = this._body.getParent()
+            .convertToWorldSpace(this._body.getPosition());
+        var curY = worldPos.y;
 
+        if (curY <= THRESH.THRESH_DOWN) return true;
+        return false;
+    },
+
+    setState: function(state) {
+        this._state = state;
+    }
+
+});
