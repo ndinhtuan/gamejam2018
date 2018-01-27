@@ -47,7 +47,6 @@ var Cannon = cc.Node.extend({
 			this._gun.setRotation(this._rotation);
 		}
 		if (this._state == 'toleft'){
-			console.log("moving left");
 			this.setPositionX(
 					this.getPositionX() - SpeedToLeft * dt
 					);

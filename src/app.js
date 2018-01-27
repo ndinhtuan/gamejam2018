@@ -1,26 +1,19 @@
 var MaxViewDistance = 1280 >> 1;
 var IngameLayer = cc.LayerColor.extend({
-	minY: null,
-	maxY: null,
-	_cannon: null,
-	_ball: null,
-	_launchOnTouch: null, _slider: null,
-	_nearObj: [],
-	_farObj: [],
-	_state : null,
+
 	ctor: function() {
-		this._super(new cc.Color(239, 239, 239, 239));
+		this.super(new cc.Color(239, 239, 239, 239));
 
-		this._ground = new cc.Sprite(res.Ground_png);
-		this._ground.setAnchorPoint(0, 0);
-		this._ground.setPositionY(60);
+		this.ground = new cc.Sprite(res.Ground_png);
+		this.ground.setAnchorPoint(0, 0);
+		this.ground.setPositionY(60);
 
 
-		this._cannon = new Cannon();
-		this._cannon.setState(StateCannonEnum.ROTATE);
-		this._cannon.setAnchorPoint(0, 0);
-		this._cannon.setPositionY(51 + 60 + 20);
-		this._cannon.setPositionX(70);
+		this.cannon = new Cannon();
+		this.cannon.setState(StateCannonEnum.ROTATE);
+		this.cannon.setAnchorPoint(0, 0);
+		this.cannon.setPositionY(51 + 60 + 20);
+		this.cannon.setPositionX(70);
 
 
 		this._target = new Cannon();
@@ -93,7 +86,6 @@ var IngameLayer = cc.LayerColor.extend({
 	},
 
 	sliderReachEnd(){
-		console.log("reach end");
 		this._cannon.toLeft();
 		this._cannon._reachLeftCallback = this.reachLeft.bind(this);
 	},
@@ -106,6 +98,7 @@ var IngameLayer = cc.LayerColor.extend({
 		this._target.setPositionY(51 + 60 + 20);
 		this._target.setPositionX(600);
 		this.addChild(this._target);
+		this._nearObj.push(this._target);
 	}
 
 
