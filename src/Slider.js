@@ -1,3 +1,6 @@
+var	SliderMinX = 10;
+var	SliderMaxX = 1000;
+
 var Slider = cc.Node.extend({
 	_slider : null,
 	_callback : null, // callback(deltaX)
@@ -22,16 +25,25 @@ var Slider = cc.Node.extend({
 				},
 				onTouchMoved: function(touch, event){
 					if (that._dragging){
-						var prev = touch.getPreviousLocation();
-						var prevX =	prev.x;  
-						if (this._callback){
-							this._callback(touch.locationX() - prevX);
+						var prevX = touch.getPreviousLocation().x;
+						var	currX = touch.getLocationX();
+						var deltaX = currX - prevX;
+						var expect = that._slider.getPositionX() + deltaX;
+						var real = Utils.Clamp(expect, SliderMinX, SliderMaxX);
+
+						if (that._callback){
+							that._callback(real - that._slider.getPositionX());
 						}
+
+						that._slider.setPositionX(
+								real
+								);
+
 					}
 				}
 			},
 
-			this);
+		this);
 	},
 
 	touchInSlider: function(touch){
