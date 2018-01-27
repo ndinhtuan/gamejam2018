@@ -19,6 +19,7 @@
 				"src/Constants.js",
 				"src/LaunchOnTouch.js",
 				"src/Ball.js",
-				"src/Utils.js"
+                "src/Utils.js",
+                "src/Slider.js"
     ]
 }

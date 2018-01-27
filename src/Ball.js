@@ -34,11 +34,16 @@ var Ball = cc.Node.extend({
 	},
 
 	isContact(node){
-
+		// TODO : 
+		// return true when the ball collision with the node
 		return false;
 	},
 
+	//TODO:
+	//change the direction when the ball hits border
+
 	reflectDown(){
+		
 
 	},
 

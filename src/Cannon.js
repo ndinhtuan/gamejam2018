@@ -18,7 +18,7 @@ var Cannon = cc.Node.extend({
 		this._state = StateCannonEnum.IDLE;
 
 		this.setAnchorPoint(0.5, 0.5);
-		this.setPositionY(maxY - minY);
+		this.setPositionY(10);
 		this.setPositionX(150);
 		this.setScale(0.7);
 
