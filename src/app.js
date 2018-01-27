@@ -29,16 +29,9 @@ var IngameLayer = cc.LayerColor.extend({
         this._ball = new Ball();
         this.addChild(this._ball);
 
-        // Slider 
+        // Slide Bar
         this._sliderBar = new Slider(size);
         this.addChild(this._sliderBar);
-
-        this._slider = new cc.Sprite(res.Slide_png);
-        this._slider.setAnchorPoint(0, 0);
-        this.addChild(this._slider);
-        this._slider.setPositionY(-65);
-        this._slider.setPositionX(50)
-
         this.scheduleUpdate();
         return true;
     },
