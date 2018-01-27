@@ -49,5 +49,9 @@ var Cannon = cc.Node.extend({
 			}
 			this._gun.setRotation(this._rotation);
 		}
+	},
+
+	slideMove(dx){
 	}
+
 });

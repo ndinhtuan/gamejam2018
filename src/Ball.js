@@ -53,6 +53,11 @@ var Ball = cc.Node.extend({
 
 	reflectRight(){
 
+	},
+	
+	slideMove(dx){
+
 	}
+
 
 })
