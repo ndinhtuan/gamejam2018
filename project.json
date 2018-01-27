@@ -1,6 +1,5 @@
 {
 	"project_type": "javascript",
-
 	"debugMode" : 1,
 	"showFPS" : true,
 	"frameRate" : 60,
@@ -24,3 +23,4 @@
 		"src/Slider.js"
 	]
 }
+

@@ -53,3 +53,4 @@ var Slider = cc.Node.extend({
 	}
 
 })
+

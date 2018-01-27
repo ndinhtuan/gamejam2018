@@ -22,7 +22,9 @@ var IngameLayer = cc.LayerColor.extend({
 		this._cannon.setState(StateCannonEnum.ROTATE);
 		this.addChild(this._cannon);
 		this._cannon.setAnchorPoint(0, 0);
-		this._cannon.setPositionY(51 + 60 + 30);
+		this._cannon.setPositionY(51 + 60 + 20);
+		this._cannon.setPositionX(150);
+		console.log(this._cannon.getPositionX());
 
 		this._launchOnTouch = new LaunchOnTouch();
 		this._launchOnTouch._launch = this.launch.bind(this);
@@ -31,16 +33,28 @@ var IngameLayer = cc.LayerColor.extend({
 		this._ball = new Ball();
 		this.addChild(this._ball);
 
-		// Slide Bar
+
+		// Slide
 		this._slider = new Slider();
 		this._slider._callback = this.slide.bind(this);
 		this.addChild(this._slider);
 
 		this.scheduleUpdate();
 
+		// Slider Bar
+		this._sliderBar = new SlideBar(size);
+		this.addChild(this._sliderBar);
+
+		this._slider = new cc.Sprite(res.Slide_png);
+		this._slider.setAnchorPoint(0, 0);
+		this.addChild(this._slider);
+		this._slider.setPositionY(15);
+		this._slider.setPositionX(50)
 
 
-		this._nearObj = [this._ground, this._cannon, this._ball];
+
+
+			this._nearObj = [this._ground, this._cannon, this._ball];
 		return true;
 	},
 

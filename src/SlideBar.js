@@ -1,10 +1,10 @@
-var SliderBar = cc.Node.extend({
-	_sliderBar: null,
+var SlideBar = cc.Node.extend({
+	_slideBar: null,
 	ctor: function(winSize){
 		var that = this;
 		this._super();
-		this._sliderBar = new cc.Sprite(res.Border_png);
-		this._sliderBar.setAnchorPoint(0, 0);
+		this._slideBar = new cc.Sprite(res.Border_png);
+		this._slideBar.setAnchorPoint(0, 0);
 		this.addChild(this._sliderBar);
 	}
 })
