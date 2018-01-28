@@ -6,11 +6,6 @@ var SpeedToLeft = 400;
 var angle = 45;
 var Cannon = cc.Node.extend({
 
-	_body: null,
-	_gun: null,
-	_state: null,
-	_rotation: 0,
-	_originX : null,
 	ctor: function() {
 		this._super();
 
