@@ -1,0 +1,53 @@
+2018-01-27T03:16:16.021Z - normal: Load ~/.CocosCreator/settings.json
+2018-01-27T03:16:16.037Z - normal: checking language setting...
+2018-01-27T03:16:16.037Z - normal: Language: en
+2018-01-27T03:16:18.127Z - success: protocol editor-framework registered
+2018-01-27T03:16:18.127Z - success: protocol app registered
+2018-01-27T03:16:18.127Z - success: protocol theme registered
+2018-01-27T03:16:18.127Z - success: protocol profile registered
+2018-01-27T03:16:18.127Z - success: protocol packages registered
+2018-01-27T03:16:18.127Z - success: protocol unpack registerred
+2018-01-27T03:16:18.127Z - success: protocol disable-commonjs registerred
+2018-01-27T03:16:20.828Z - normal: connected!
+2018-01-27T03:16:20.828Z - normal: Check project C:\Users\TranThanhTung\Desktop\gamejam2018
+2018-01-27T03:16:20.843Z - normal: Initializing Cocos2d
+2018-01-27T03:16:21.249Z - normal: Initializing Asset Database
+2018-01-27T03:16:21.296Z - success: protocol uuid registerred
+2018-01-27T03:16:21.296Z - success: protocol db registerred
+2018-01-27T03:16:21.296Z - success: protocol thumbnail registerred
+2018-01-27T03:16:21.296Z - normal: Loading editor/builtin packages
+2018-01-27T03:16:21.343Z - success: anysdk loaded
+2018-01-27T03:16:21.530Z - success: assets loaded
+2018-01-27T03:16:21.545Z - success: builder loaded
+2018-01-27T03:16:21.545Z - success: hierarchy loaded
+2018-01-27T03:16:21.545Z - success: inspector loaded
+2018-01-27T03:16:21.545Z - success: keystore loaded
+2018-01-27T03:16:21.561Z - success: node-library loaded
+2018-01-27T03:16:21.561Z - success: package-asset loaded
+2018-01-27T03:16:21.561Z - success: preferences loaded
+2018-01-27T03:16:21.561Z - success: project-exporter loaded
+2018-01-27T03:16:21.592Z - success: project-importer loaded
+2018-01-27T03:16:21.592Z - success: project-settings loaded
+2018-01-27T03:16:21.592Z - success: ui-kit loaded
+2018-01-27T03:16:21.608Z - success: ui-grid loaded
+2018-01-27T03:16:21.608Z - success: scene loaded
+2018-01-27T03:16:21.608Z - success: sprite-editor loaded
+2018-01-27T03:16:21.623Z - success: store loaded
+2018-01-27T03:16:21.623Z - success: timeline loaded
+2018-01-27T03:16:21.623Z - normal: Loading builtin packages
+2018-01-27T03:16:21.639Z - success: asset-db-debugger loaded
+2018-01-27T03:16:21.639Z - success: color-picker loaded
+2018-01-27T03:16:21.639Z - success: console loaded
+2018-01-27T03:16:21.639Z - success: package-manager loaded
+2018-01-27T03:16:21.655Z - success: sdkbox loaded
+2018-01-27T03:16:21.655Z - success: tester loaded
+2018-01-27T03:16:21.655Z - success: ui-kit-preview-extra loaded
+2018-01-27T03:16:21.655Z - success: ui-kit-preview loaded
+2018-01-27T03:16:21.655Z - success: ui-tree loaded
+2018-01-27T03:16:23.168Z - normal: Initializing project C:\Users\TranThanhTung\Desktop\gamejam2018
+2018-01-27T03:16:23.183Z - normal: Loading packages
+2018-01-27T03:16:23.183Z - normal: Watching packages
+2018-01-27T03:16:23.215Z - normal: Run Application
+2018-01-27T03:16:24.260Z - success: preview server running at http://localhost:7456
+2018-01-27T03:16:30.922Z - normal: 1.6.1
+2018-01-27T10:08:49.977Z - info: shutdown preview server

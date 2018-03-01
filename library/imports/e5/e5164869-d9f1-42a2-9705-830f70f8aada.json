@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "Carrier",
+    "texture": "b7276730-3cbe-4765-b19e-5d64268f5848",
+    "atlas": "",
+    "rect": [
+      41,
+      124,
+      137,
+      76
+    ],
+    "offset": [
+      -0.5,
+      -62
+    ],
+    "originalSize": [
+      220,
+      200
+    ]
+  }
+}
